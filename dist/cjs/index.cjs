@@ -44,6 +44,13 @@ __export(index_exports, {
 });
 module.exports = __toCommonJS(index_exports);
 var PlacefileManager = class {
+  /**
+   * @function parsePlacefile
+   * @description
+   *     Parses a Placefile string and returns an array of PlacefileInput objects.
+   *
+   * @param data - The Placefile string to be parsed.
+   */
   static parsePlacefile(data) {
     return __async(this, null, function* () {
       let objects = [];
@@ -90,8 +97,8 @@ var PlacefileManager = class {
           currentObject.icon = {
             x: parseFloat(parts[0]),
             y: parseFloat(parts[1]),
-            color: parts[2],
             scale: parseFloat(parts[3]),
+            color: parts[2],
             type: parts[4],
             label: parts.slice(5).join(",").trim().replace(/^"|"$/g, "")
           };
@@ -108,6 +115,13 @@ var PlacefileManager = class {
       return objects;
     });
   }
+  /**
+   * @function parseTable
+   * @description
+   *     Parses a table-formatted string and returns an array of objects.
+   *
+   * @param data - The table-formatted string to be parsed.
+   */
   static parseTable(data) {
     return __async(this, null, function* () {
       let lines = data.split(/\r?\n/);
@@ -130,6 +144,13 @@ var PlacefileManager = class {
       return objects;
     });
   }
+  /**
+   * @function parseGeoJSON
+   * @description
+   *     Parses a GeoJSON string and returns an array of PlacefileGeoOutput objects.
+   *
+   * @param data - The GeoJSON string to be parsed.
+   */
   static parseGeoJSON(data) {
     return __async(this, null, function* () {
       let geojson;
@@ -150,6 +171,19 @@ var PlacefileManager = class {
       return features;
     });
   }
+  /**
+   * @function createPlacefile
+   * @description
+   *     Creates a Placefile string from the provided PlacefileCreationInput data.
+   *
+   * @param data
+   * - refresh: The refresh interval for the Placefile.
+   * - threshold: The threshold value for the Placefile.
+   * - title: The title of the Placefile.
+   * - settings: Additional settings for the Placefile.
+   * - type: The type of Placefile to create ('point' or other).
+   * - data: An array of data objects to include in the Placefile.
+   */
   static createPlacefile(data) {
     return __async(this, null, function* () {
       var _a, _b, _c, _d;

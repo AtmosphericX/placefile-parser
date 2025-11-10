@@ -15,6 +15,13 @@ import * as types from './types';
 
 export class PlacefileManager { 
     
+    /**
+     * @function parsePlacefile
+     * @description
+     *     Parses a Placefile string and returns an array of PlacefileInput objects.
+     *
+     * @param data - The Placefile string to be parsed.
+     */
     static async parsePlacefile(data: string): Promise<types.PlacefileInput[]> {
         let objects = [];
         let currentObject: types.PlacefileInput = {};
@@ -59,9 +66,9 @@ export class PlacefileManager {
                 const parts = line.replace(`Icon:`, '').trim().split(',')
                 currentObject.icon = { 
                     x: parseFloat(parts[0]), 
-                    y: parseFloat(parts[1]), 
+                    y: parseFloat(parts[1]),
+                    scale: parseFloat(parts[3]),  
                     color: parts[2], 
-                    scale: parseFloat(parts[3]), 
                     type: parts[4], 
                     label: parts.slice(5).join(',').trim().replace(/^"|"$/g, '') 
                 }
@@ -78,6 +85,14 @@ export class PlacefileManager {
         return objects;
     }
 
+    
+    /**
+     * @function parseTable
+     * @description
+     *     Parses a table-formatted string and returns an array of objects.
+     *
+     * @param data - The table-formatted string to be parsed.
+     */
     static async parseTable(data: string): Promise<any[]> {
         let lines = data.split(/\r?\n/)
         let objects = []
@@ -95,6 +110,13 @@ export class PlacefileManager {
         return objects
     }
 
+    /**
+     * @function parseGeoJSON
+     * @description
+     *     Parses a GeoJSON string and returns an array of PlacefileGeoOutput objects.
+     *
+     * @param data - The GeoJSON string to be parsed.
+     */
     static async parseGeoJSON(data: string): Promise<types.PlacefileGeoOutput[] | string> {
         let geojson: types.placefileGeoInput
         try { geojson = (typeof data === 'string') ? JSON.parse(data) : data }
@@ -111,6 +133,19 @@ export class PlacefileManager {
         return features
     }
 
+    /**
+     * @function createPlacefile
+     * @description
+     *     Creates a Placefile string from the provided PlacefileCreationInput data.
+     *
+     * @param data
+     * - refresh: The refresh interval for the Placefile.
+     * - threshold: The threshold value for the Placefile.
+     * - title: The title of the Placefile.
+     * - settings: Additional settings for the Placefile.
+     * - type: The type of Placefile to create ('point' or other).
+     * - data: An array of data objects to include in the Placefile.
+     */
     static async createPlacefile(data: types.PlacefileCreationInput): Promise<string> { 
         let placefileText = `Refresh: ${data?.refresh ?? `60`}\nThreshold: ${data?.threshold ?? 9999}\nTitle: ${data?.title ?? `No Tile`}\n${data?.settings ?? ``}\n`
         if (data?.type === 'point') {
