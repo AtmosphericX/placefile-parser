@@ -1,37 +1,40 @@
 {
-  "name": "atmosx-placefile-parser",
-  "version": "1.0.04",
-  "description": "AtmosphericX Placefile Parser and Creation Tool",
-  "main": "dist/helper.js",
-  "types": "src/helper.d.ts",
-  "scripts": {
-    "build:npx": "npx tsc && cd ./test && node ./index.js",
-    "build:tsup": "tsup && cd ./test && node ./index.js",
-    "publish": "npm publish --access public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/K3YOMI/atmosx-placefile-parser.git"
-  },
-  "keywords": [
-    "Placefiles",
-    "Meteorology",
-    "Weather",
-    "Radar Data",
-    "AtmosphericX"
-  ],
-  "author": "K3YOMI, Starflight",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/K3YOMI/atmosx-placefile-parser/issues"
-  },
-  "homepage": "https://github.com/K3YOMI/atmosx-placefile-parser#readme",
-  "dependencies": {
-    "axios": "^1.8.2",
-    "typescript": "^5.9.2"
-  },
-  "devDependencies": {
-    "@types/node": "^24.5.2",
-    "tsup": "^8.5.0"
-  }
+	"name": "atmosx-placefile-parser",
+	"version": "2.0.0",
+	"description": "WX Placefile Parser and Creation - Built for standalone and Project AtmosphericX Integration.",
+	"main": "dist/cjs/index.cjs",
+	"module": "dist/esm/index.mjs",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/K3YOMI/atmosx-placefile-parser.git",
+		"branch": "beta-ready"
+	},
+	"scripts": {
+		"start": "cd ./test && node ./index.js",
+		"build:tsup": "tsup && cd ./test && node ./index.js",
+		"publish": "tsup && npm publish --access public",
+		"publish-beta": "tsup && npm publish --tag beta-ready --access public"
+	},
+	"keywords": [
+		"Weather",
+		"Placefiles",
+		"TypeScript",
+		"Parser",
+		"JavaScript",
+		"CommonJS",
+		"ESM"
+	],
+	"author": "k3yomi, StarflightWx",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/K3YOMI/atmosx-placefile-parser/issues"
+	},
+	"homepage": "https://github.com/K3YOMI/atmosx-placefile-parser#readme",
+	"dependencies": {
+		"typescript": "^5.9.2"
+	},
+	"devDependencies": {
+		"@types/node": "^24.5.2",
+		"tsup": "^8.5.0"
+	}
 }
