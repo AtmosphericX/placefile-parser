@@ -1,0 +1,12 @@
+Refresh: 1
+Threshold: 999
+Title: Spotter Network Positions (96dpi) - All
+Font: 1, 11, 0, "Courier New"
+IconFile: 1, 30, 30, 15, 15, "https://www.spotternetwork.org/iconsheets/Spotternet_096.png"
+IconFile: 2, 21, 35, 10, 17, "https://www.spotternetwork.org/iconsheets/Arrows_096.png"
+IconFile: 6, 30, 30, 15, 15, "https://www.spotternetwork.org/iconsheets/Spotternet_New_096.png"
+
+Object: 45.4012108,-93.8804321
+Icon: 0,0,000,6,6,"NAME HERE\nDATE HERE UTC\nSTATIONARY\nPhone: NUMBER_HERE\nEmail: EMAIL_HERE"
+Text: 15, 10, 1, "NAME HERE"
+End:
