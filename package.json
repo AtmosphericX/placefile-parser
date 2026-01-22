@@ -1,12 +1,12 @@
 {
 	"name": "atmosx-placefile-parser",
-	"version": "2.0.02",
+	"version": "2.0.1",
 	"description": "WX Placefile Parser and Creation - Built for standalone and Project AtmosphericX Integration.",
 	"main": "dist/cjs/index.cjs",
 	"module": "dist/esm/index.mjs",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/K3YOMI/atmosx-placefile-parser.git",
+		"url": "git+https://github.com/AtmosphericX/atmosx-placefile-parser.git",
 		"branch": "beta"
 	},
 	"scripts": {
@@ -27,9 +27,9 @@
 	"author": "k3yomi, StarflightWx",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/K3YOMI/atmosx-placefile-parser/issues"
+		"url": "https://github.com/AtmosphericX/atmosx-placefile-parser/issues"
 	},
-	"homepage": "https://github.com/K3YOMI/atmosx-placefile-parser#readme",
+	"homepage": "https://github.com/AtmosphericX/atmosx-placefile-parser#readme",
 	"dependencies": {
 		"typescript": "^5.9.2"
 	},
