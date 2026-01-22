@@ -43,13 +43,13 @@ export class PlacefileManager {
             if (line.match(/^-?\d+(\.\d+)?,-?\d+(\.\d+)?$/)) {
                 const coords = line.split(',')
                 if (currentObject.coordinates) { 
-                    currentObject.coordinates.push([parseFloat(coords[0]), parseFloat(coords[1])]) 
+                    currentObject.coordinates.push([parseFloat(coords[1]), parseFloat(coords[0])]) 
                 }
             }
             if (line.startsWith('Object:')) {
                 const coordinates = line.replace(`Object:`, '').trim().split(',')
                 currentObject.object = {  
-                    coordinates: [parseFloat(coordinates[0]), parseFloat(coordinates[1])], 
+                    coordinates: [parseFloat(coordinates[1]), parseFloat(coordinates[0])], 
                     properties: {} 
                 }
             }
