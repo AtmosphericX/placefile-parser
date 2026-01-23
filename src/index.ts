@@ -25,7 +25,7 @@ export class PlacefileManager {
     static async parsePlacefile(data: string): Promise<types.PlacefileInput[]> {
         let objects = [];
         let currentObject: types.PlacefileInput = {};
-        const lines = data.split(/\r?\n/);
+        const lines = data.split(/\r?\n/) as any;
         for (let line of lines) {
             line = line.trim();
             if (!line || line.startsWith('//')) {
