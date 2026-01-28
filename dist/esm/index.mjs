@@ -163,7 +163,7 @@ var PlacefileManager = class {
    */
   static createPlacefile(data) {
     return __async(this, null, function* () {
-      var _a, _b, _c, _d;
+      var _a, _b, _c, _d, _e;
       let placefileText = `Refresh: ${(_a = data == null ? void 0 : data.refresh) != null ? _a : `60`}
 Threshold: ${(_b = data == null ? void 0 : data.threshold) != null ? _b : 9999}
 Title: ${(_c = data == null ? void 0 : data.title) != null ? _c : `No Tile`}
@@ -179,26 +179,38 @@ Object: ${point[1]},${point[0]}`, `Icon: ${icon},"${description.replace(/\n/g, "
           }
         }
       } else {
-        for (let item of data == null ? void 0 : data.data) {
-          let { description = `No description provided`, polygon = [], rgb = `255,255,255,255` } = item || {};
+        for (const item of (_e = data == null ? void 0 : data.data) != null ? _e : []) {
+          let { description = "No description provided", polygon, rgb = "255,255,255,255" } = item;
+          if (!polygon) continue;
           rgb = rgb.replace(/,/g, " ");
-          let hasCoords = Array.isArray(polygon) && polygon.some((ring) => Array.isArray(ring) && ring.some((pt) => Array.isArray(pt) && pt.length == 2 && typeof pt[0] == "number" && typeof pt[1] == "number"));
-          if (!hasCoords) continue;
-          placefileText += `
+          const polygons = [];
+          if (polygon.type === "Polygon") {
+            polygons.push([polygon.coordinates]);
+          } else if (polygon.type === "MultiPolygon") {
+            for (const p of polygon.coordinates) {
+              polygons.push(p);
+            }
+          } else if (Array.isArray(polygon)) {
+            polygons.push(polygon);
+          }
+          if (polygons.length === 0) continue;
+          for (const poly of polygons) {
+            const outer = poly[0];
+            if (!outer) continue;
+            placefileText += `
 Color: ${rgb}
 
 Line: 3,0, ${description}
 `;
-          for (let ring of polygon) {
-            for (let pt of ring) {
-              if (Array.isArray(pt) && pt.length == 2) {
+            for (const pt of outer) {
+              if (Array.isArray(pt) && pt.length === 2) {
                 placefileText += `${pt[1]},${pt[0]}
 `;
               }
             }
-          }
-          placefileText += `End:
+            placefileText += `End:
 `;
+          }
         }
       }
       return placefileText.trim();

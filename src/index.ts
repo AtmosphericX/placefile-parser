@@ -156,18 +156,33 @@ export class PlacefileManager {
                 }
             }
         } else {
-            for (let item of data?.data) {
-                let { description = `No description provided`, polygon = [], rgb = `255,255,255,255` } = (item as any) || {};
-                rgb = rgb.replace(/,/g, ' ');
-                let hasCoords = Array.isArray(polygon) && polygon.some(ring => Array.isArray(ring) && ring.some(pt => Array.isArray(pt) && pt.length == 2 && typeof pt[0] == 'number' && typeof pt[1] == 'number'));
-                if (!hasCoords) continue;
-                placefileText += `\nColor: ${rgb}\n\nLine: 3,0, ${description}\n`;
-                for (let ring of polygon) {
-                    for (let pt of ring) {
-                        if (Array.isArray(pt) && pt.length == 2) { placefileText += `${pt[1]},${pt[0]}\n`; }
+            for (const item of data?.data ?? []) {
+                let { description = "No description provided", polygon, rgb = "255,255,255,255" } = item as any;
+                if (!polygon) continue;
+                rgb = rgb.replace(/,/g, " ");
+                const polygons: number[][][] = [];
+                if (polygon.type === "Polygon") {
+                    polygons.push([polygon.coordinates]);
+                } else if (polygon.type === "MultiPolygon") {
+                    for (const p of polygon.coordinates) {
+                        polygons.push(p);
                     }
+                } else if (Array.isArray(polygon)) {
+                    polygons.push(polygon);
                 }
-                placefileText += `End:\n`;
+                if (polygons.length === 0) continue;
+                for (const poly of polygons) {
+                    const outer = poly[0];
+                    if (!outer) continue;
+
+                    placefileText += `\nColor: ${rgb}\n\nLine: 3,0, ${description}\n`;
+                    for (const pt of outer) {
+                        if (Array.isArray(pt) && pt.length === 2) {
+                            placefileText += `${pt[1]},${pt[0]}\n`;
+                        }
+                    }
+                    placefileText += `End:\n`;
+                }
             }
         }
         return placefileText.trim();
