@@ -208,7 +208,7 @@ Object: ${point[1]},${point[0]}`, `Icon: ${icon},"${description.replace(/\n/g, "
           rgb = rgb.replace(/,/g, " ");
           const polygons = [];
           if (polygon.type === "Polygon") {
-            polygons.push([polygon.coordinates]);
+            polygons.push(polygon.coordinates);
           } else if (polygon.type === "MultiPolygon") {
             for (const p of polygon.coordinates) {
               polygons.push(p);

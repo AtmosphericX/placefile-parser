@@ -162,7 +162,7 @@ export class PlacefileManager {
                 rgb = rgb.replace(/,/g, " ");
                 const polygons: number[][][] = [];
                 if (polygon.type === "Polygon") {
-                    polygons.push([polygon.coordinates]);
+                    polygons.push(polygon.coordinates);
                 } else if (polygon.type === "MultiPolygon") {
                     for (const p of polygon.coordinates) {
                         polygons.push(p);
