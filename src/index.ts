@@ -36,14 +36,14 @@ export class PlacefileManager {
                 currentObject.line = { 
                     width: parseFloat(parts[0]), 
                     style: parseFloat(parts[1]), 
-                    text: parts.slice(2).join(',').trim() 
+                    text: parts.slice(2).join(',').trim().replace(/^"|"$/g, '') 
                 }
                 currentObject.coordinates = []
             }
-            if (line.match(/^-?\d+(\.\d+)?,-?\d+(\.\d+)?$/)) {
-                const coords = line.split(',')
-                if (currentObject.coordinates) { 
-                    currentObject.coordinates.push([parseFloat(coords[1]), parseFloat(coords[0])]) 
+            if (/^-?\d+(\.\d+)?,\s*-?\d+(\.\d+)?$/.test(line)) {
+                const coords = line.split(',').map(v => parseFloat(v.trim()));
+                if (currentObject.coordinates) {
+                    currentObject.coordinates.push([coords[1], coords[0]]);
                 }
             }
             if (line.startsWith('Object:')) {
