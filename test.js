@@ -1,4 +1,4 @@
-const { PlacefileManager } = require("atmosx-placefile-parser");
+const { PlacefileManager } = require("@atmosx/placefile-parser");
 const fs = require("fs");
 
 const sample = fs.readFileSync("test.txt", "utf-8");

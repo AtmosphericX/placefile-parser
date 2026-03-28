@@ -4,22 +4,22 @@
   	<p align = "center">A Placefile is a structured text file used to provide geospatial data for mapping applications, often for weather alerts, storm reports, or points of interest. A Placefile contains instructions for displaying locations on a map, including coordinates, labels, colors, icons, and refresh intervals. This module is primarily intended for use with the https://github.com/k3yomi/AtmosphericX project.</small></p>
   	<p align = "center">Documentation written by @k3yomi</p>
 	<div align="center" style="border: none;">
-		<img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/k3yomi/atmosx-placefile-parser">
-		<img alt="GitHub forks" src="https://img.shields.io/github/forks/k3yomi/atmosx-placefile-parser">
-		<img alt="GitHub issues" src="https://img.shields.io/github/issues/k3yomi/atmosx-placefile-parser">
-		<img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/k3yomi/atmosx-placefile-parser">
+		<img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/AtmosphericX/placefile-parser">
+		<img alt="GitHub forks" src="https://img.shields.io/github/forks/AtmosphericX/placefile-parser">
+		<img alt="GitHub issues" src="https://img.shields.io/github/issues/AtmosphericX/placefile-parser">
+		<img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/AtmosphericX/placefile-parser">
 	</div>
 </div>
 
 ## Installation (NPM)
 ```bash
-npm install atmosx-placefile-parser
+npm install @atmosx/placefile-parser
 ```
 
 ## Example Usage
 ```javascript
-const { PlacefileManager } = require('atmosx-placefile-parser'); // CJS
-import { PlacefileManager } from 'atmosx-placefile-parser'; // ESM
+const { PlacefileManager } = require('@atmosx/placefile-parser'); // CJS
+import { PlacefileManager } from '@atmosx/placefile-parser'; // ESM
 
 
 const sample = fs.readFileSync("test", "utf-8"); // For testing...
